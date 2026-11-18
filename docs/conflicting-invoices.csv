@@ -1,0 +1,87 @@
+source_row,invoice_id,account_id,account_name,contact_email,region,industry,plan,billing_cycle,seats,currency,amount,discount_pct,status,payment_method,signup_date,invoice_date,churned,csat_score,support_tickets
+108,INV-100071,ACC-3587,Acme Ltd,billing@acme.com,EMEA,Retail,Start,Monthly,100,USD,4900.00,0,completed,,2022-04-21,2023/10/20,No,1,0
+135,INV-102011,ACC-8353,Aperture Labs,billing@aperture.com,NA,Fintech, Starter ,annual,3,USD,1323.00,10,Complete,invoice,2024-03-18,2026-06-17,No,1,3
+186,INV-103521,ACC-5854,Wayne Labs,billing@wayne.com,NA,Education,Starter,Monthly,10,EUR,€529.20,0,success,invoice,2021/01/14,18-07-2021,N,3,0
+189,INV-104040,ACC-2985,Initech Labs,billing@initech.com,EMEA,Education, Starter ,annually,10,USD,"3,675.00 USD",25,completed,credit_card,Sep 17 2022,11/05/2022,0,3,0
+246,INV-100630,ACC-2113,Wonka Ltd,billing@wonka.com,APAC,Travel,Tier 3,Monthly,10,USD,2990,0,Complete,invoice,2021/12/19,01/31/2022,0,5,1
+313,INV-104009,ACC-1665,Initech Partners,billing@initech.com,LATAM,Energy,PRO,monthly,3,USD,297.00 USD,0,void,credit_card,2023/03/17,03/08/2025,Y,5,1
+370,INV-103377,ACC-9938,Massive Dynamic Holdings,,EMEA,,Professional,annually,1,USD,990.00,0,Paid,ach,2021-04-23,2023-09-04,Y,5,8
+381,INV-104040,ACC-2985,Initech Labs,billing@initech.com,EMEA,Education, Starter ,annually,10,USD,"3,675.00 USD",25,paid,credit_card,Sep 17 2022,11/05/2022,0,3,0
+464,INV-101631,ACC-6453,Hooli Partners,billing@hooli.com,NA,Media,Tier 2,Monthly,250,EUR,26730.00,0,Pending,ACH,2023-04-22,Nov 21 2023,N,5,0
+467,INV-104205,ACC-1897,Tyrell Holdings,billing@tyrell.com,NA,Manufacturing,enterprise ,annual,5,EUR,13724.10,15,PAID,credit_card,2023-07-09,2025-09-01,false,2,0
+484,INV-101448,ACC-3564,Tyrell Industries,billing@tyrell.com,EMEA,Travel, Starter ,Annual,25,USD,"$12,250.00",0,Complete,Wire Transfer,15-06-2023,12/31/2023,1,3,0
+499,INV-100630,ACC-2113,Wonka Ltd,billing@wonka.com,APAC,Travel,Tier 3,Monthly,10,USD,2990,0,void,invoice,2021/12/19,01/31/2022,0,5,1
+520,INV-103694,ACC-5091,Massive Dynamic Ltd,billing@massive.com,EMEA,Energy,PRO,monthly,50,USD,4950.00,0,Complete,Wire Transfer,Jun 28 2024,2025-11-10,TRUE,4,0
+591,INV-102470,ACC-5505,Prestige Inc,billing@prestige.com,NA,Healthcare,Start,annual,10,EUR,4234,20,Complete,credit_card,11-07-2023,2026-03-14,N,5,0
+607,INV-103598,ACC-4290,Umbrella Group,billing@umbrella.com,NA,Media,Pro,yearly,10,EUR,"€9,088.20",15,PAID,ach,08/06/2021,2023-09-24,false,5,0
+671,INV-101448,ACC-3564,Tyrell Industries,billing@tyrell.com,EMEA,Travel, Starter ,Annual,25,USD,"$12,250.00",0,paid,Wire Transfer,15-06-2023,12/31/2023,1,3,0
+848,INV-103377,ACC-9938,Massive Dynamic Holdings,,EMEA,,Professional,annually,1,USD,990.00,0,PAID,ach,2021-04-23,2023-09-04,Y,5,8
+910,INV-102462,ACC-1974,Dunder Co,billing@dunder.com,NA,Fintech,Pro,annually,250,GBP,314325.00,0,success,wire,Nov 29 2022,Aug 30 2024,FALSE,3,5
+923,INV-102076,ACC-3593,Oscorp Industries,billing@oscorp.com,NA,Healthcare, Starter ,annually,5,USD,-1960.00,20,completed,Wire Transfer,2023-07-04,2023-12-05,1,5,0
+935,INV-100071,ACC-3587,Acme Ltd,billing@acme.com,EMEA,Retail,Start,Monthly,100,USD,4900.00,0,paid,,2022-04-21,2023/10/20,No,1,0
+995,INV-102462,ACC-1974,Dunder Co,billing@dunder.com,NA,Fintech,Pro,annually,250,GBP,314325.00,0,completed,wire,Nov 29 2022,Aug 30 2024,FALSE,3,5
+1017,INV-103437,ACC-9964,Hooli Holdings,billing@hooli.com,NA,Retail,pro,Annual,5,EUR,"€5,346.00",0,completed,ach,2023-10-04,2024-12-04,No,2,0
+1036,INV-101434,ACC-3099,Soylent Holdings,billing@soylent.com,NA,Healthcare,Start,Annual,100,USD,49000.00,0,Complete,wire,2021-04-09,2021-09-24,0,5,0
+1076,INV-103320,ACC-3945,Vandelay Labs,billing@vandelay.com,NA,Gaming,STARTER,Monthly,50,USD,"$2,450.00",0,paid,credit_card,03/31/2022,08/26/2022,N,4,0
+1226,INV-104647,ACC-7555,Massive Dynamic Labs,billing@massive.com,NA,Fintech,Professional,annual,5,USD,"4,950.00 USD",0,canceled,,2024-03-29,04/21/2025,N,4,3
+1314,INV-101010,ACC-5014,Acme Industries,billing@acme.com,APAC,Travel,Professional,yearly,1,EUR,1069.20,0,completed,ACH,2021/10/10,2023/03/01,Yes,4,1
+1452,INV-100838,ACC-1269,Prestige Holdings,billing@prestige.com,NA,,Start,annual,250,USD,"$122,500.00",0,Complete,Credit Card,04/17/2021,2022-05-24,false,4,0
+1460,INV-102011,ACC-8353,Aperture Labs,billing@aperture.com,NA,Fintech, Starter ,annual,3,USD,1323.00,10,PAID,invoice,2024-03-18,2026-06-17,No,1,3
+1539,INV-104646,ACC-5039,Stark Inc,billing@stark.com,LATAM,Media,pro,Monthly,25,USD,"$2,475.00",0,PAID,,2022/02/02,2022-11-10,No,4,3
+1581,INV-104133,ACC-2105,Aperture Labs,billing@aperture.com,APAC,Travel,Tier 1,monthly,25,USD,"$1,225.00",0,paid,ACH,Sep 13 2024,08/31/2026,false,3,3
+1589,INV-102076,ACC-3593,Oscorp Industries,billing@oscorp.com,NA,Healthcare, Starter ,annually,5,USD,-1960.00,20,Refunded,Wire Transfer,2023-07-04,2023-12-05,1,5,0
+1631,INV-101058,ACC-9641,Tyrell LLC,billing@tyrell.com,NA,Retail,ENT,Monthly,50,USD,14950.00,0,completed,,2023-03-31,2025-05-15,N,,1
+1680,INV-101631,ACC-6453,Hooli Partners,billing@hooli.com,NA,Media,Tier 2,Monthly,250,EUR,26730.00,0,completed,ACH,2023-04-22,Nov 21 2023,N,5,0
+1783,INV-102015,ACC-3513,Aperture Group,billing@aperture.com,APAC,Manufacturing,PRO,annual,50,EUR,53460.00,0,Complete,,2021/03/12,2022/01/12,N,,2
+1850,INV-101109,ACC-3742,Acme LLC,billing_at_acme.com,LATAM,Retail,Tier 1,Monthly,250,USD,"12,250.00 USD",0,PAID,wire,2022-10-26,03/15/2023,No,4,8
+1857,INV-104439,ACC-1205,Vandelay Corp,billing@vandelay.com,EMEA,Manufacturing,starter,Annual,25,GBP,"£15,557.50",0,PAID,ACH,05/27/2022,02/10/2025,false,5,1
+1998,INV-104647,ACC-7555,Massive Dynamic Labs,billing@massive.com,NA,Fintech,Professional,annual,5,USD,"4,950.00 USD",0,Complete,,2024-03-29,04/21/2025,N,4,3
+2090,INV-103694,ACC-5091,Massive Dynamic Ltd,billing@massive.com,EMEA,Energy,PRO,monthly,50,USD,4950.00,0,Paid,Wire Transfer,Jun 28 2024,2025-11-10,TRUE,4,0
+2097,INV-102658,ACC-6517,Nakatomi LLC,billing@nakatomi.com,NA,Energy,enterprise ,annually,10,USD,29900,0,Pending,Wire Transfer,2024/07/14,2026-11-05,Yes,,0
+2253,INV-104439,ACC-1205,Vandelay Corp,billing@vandelay.com,EMEA,Manufacturing,starter,Annual,25,GBP,"£15,557.50",0,Complete,ACH,05/27/2022,02/10/2025,false,5,1
+2345,INV-102470,ACC-5505,Prestige Inc,billing@prestige.com,NA,Healthcare,Start,annual,10,EUR,4234,20,Pending,credit_card,11-07-2023,2026-03-14,N,5,0
+2366,INV-102032,ACC-2847,Gekko Partners,billing@gekko.com,NA,Travel,starter,monthly,50,USD,2450.00,0,paid,credit_card,2024-05-02,2024-11-27,Y,4,1
+2429,INV-100829,ACC-3505,Cyberdyne Co,billing@cyberdyne.com,APAC,Education,Pro ,Monthly,10,USD,990.00,0,PAID,,12/01/2021,10/22/2022,false,2,8
+2438,INV-102561,ACC-7776,Hooli Corp,billing@hooli.com,NA,Retail,Tier 1,Monthly,50,USD,2205.00,10,Paid,Wire Transfer,2024-01-29,2026-06-01,N,5,0
+2443,INV-103655,ACC-5204,Nakatomi Partners,billing@nakatomi.com,NA,Manufacturing,Pro ,Monthly,250,USD,24750.00,0,Paid,ACH,2021-12-20,2024-04-07,0,5,0
+2531,INV-104009,ACC-1665,Initech Partners,billing@initech.com,LATAM,Energy,PRO,monthly,3,USD,297.00 USD,0,completed,credit_card,2023/03/17,03/08/2025,Y,5,1
+2644,INV-100362,ACC-7484,Gekko Labs,,EMEA,Logistics,STARTER,annually,10,EUR,5292.00,0,completed,Wire Transfer,2021-01-09,19-07-2023,0,1,8
+2684,INV-103320,ACC-3945,Vandelay Labs,billing@vandelay.com,NA,Gaming,STARTER,Monthly,50,USD,"$2,450.00",0,PENDING,credit_card,03/31/2022,08/26/2022,N,4,0
+2748,INV-103437,ACC-9964,Hooli Holdings,billing@hooli.com,NA,Retail,pro,Annual,5,EUR,"€5,346.00",0,in_review,ach,2023-10-04,2024-12-04,No,2,0
+2800,INV-100838,ACC-1269,Prestige Holdings,billing@prestige.com,NA,,Start,annual,250,USD,"$122,500.00",0,Paid,Credit Card,04/17/2021,2022-05-24,false,4,0
+3007,INV-101434,ACC-3099,Soylent Holdings,billing@soylent.com,NA,Healthcare,Start,Annual,100,USD,49000.00,0,success,wire,2021-04-09,2021-09-24,0,5,0
+3020,INV-102104,ACC-9170,Wonka Holdings,billing@wonka.com,LATAM,Gaming,Starter,annual,100,USD,"$49,000.00",0,Complete,ach,08/03/2021,06/04/2022,TRUE,4,0
+3194,INV-101946,ACC-7231,Initech Inc,billing@initech.com,NA,, Starter ,monthly,25,USD,"$1,225.00",0,success,ach,2021-04-05,2023/10/24,0,4,2
+3226,INV-103598,ACC-4290,Umbrella Group,billing@umbrella.com,NA,Media,Pro,yearly,10,EUR,"€9,088.20",15,Complete,ach,08/06/2021,2023-09-24,false,5,0
+3267,INV-100152,ACC-3435,Prestige Co,billing@prestige.com,EMEA,Energy,starter,Monthly,10,USD,$490.00,0,completed,ACH,2024/09/19,05/21/2025,No,,2
+3283,INV-101678,ACC-6753,Oscorp Industries,billing@oscorp.com,NA,Education,Pro,monthly,5,USD,$495.00,0,completed,Wire Transfer,2021-11-01,May 2 2024,0,3,0
+3294,INV-104133,ACC-2105,Aperture Labs,billing@aperture.com,APAC,Travel,Tier 1,monthly,25,USD,"$1,225.00",0,completed,ACH,Sep 13 2024,08/31/2026,false,3,3
+3295,INV-100829,ACC-3505,Cyberdyne Co,billing@cyberdyne.com,APAC,Education,Pro ,Monthly,10,USD,990.00,0,cancelled,,12/01/2021,10/22/2022,false,2,8
+3476,INV-102561,ACC-7776,Hooli Corp,billing@hooli.com,NA,Retail,Tier 1,Monthly,50,USD,2205.00,10,paid,Wire Transfer,2024-01-29,2026-06-01,N,5,0
+3483,INV-103831,ACC-5379,Massive Dynamic Partners,billing@massive.com,APAC,Logistics, Starter ,monthly,10,USD,490,0,paid,invoice,2024/06/26,2026/02/26,Y,5,0
+3589,INV-103655,ACC-5204,Nakatomi Partners,billing@nakatomi.com,NA,Manufacturing,Pro ,Monthly,250,USD,24750.00,0,PENDING,ACH,2021-12-20,2024-04-07,0,5,0
+3672,INV-102708,ACC-3765,Prestige Inc,billing@prestige.com,APAC,,enterprise,Annual,10,USD,-29900.00,0,REFUND,Credit Card,2024-05-08,25-07-2025,N,5,0
+3709,INV-103831,ACC-5379,Massive Dynamic Partners,billing@massive.com,APAC,Logistics, Starter ,monthly,10,USD,490,0,completed,invoice,2024/06/26,2026/02/26,Y,5,0
+3752,INV-101946,ACC-7231,Initech Inc,billing@initech.com,NA,, Starter ,monthly,25,USD,"$1,225.00",0,Complete,ach,2021-04-05,2023/10/24,0,4,2
+3954,INV-102416,ACC-3608,Oscorp LLC,billing@oscorp.com,APAC,Energy,starter,Monthly,50,GBP,"2,800.35 GBP",10,Paid,Credit Card,Dec 26 2022,07/01/2023,No,3,0
+4206,INV-104646,ACC-5039,Stark Inc,billing@stark.com,LATAM,Media,pro,Monthly,25,USD,"$2,475.00",0,Complete,,2022/02/02,2022-11-10,No,4,3
+4295,INV-102032,ACC-2847,Gekko Partners,billing@gekko.com,NA,Travel,starter,monthly,50,USD,2450.00,0,PAID,credit_card,2024-05-02,2024-11-27,Y,4,1
+4296,INV-102104,ACC-9170,Wonka Holdings,billing@wonka.com,LATAM,Gaming,Starter,annual,100,USD,"$49,000.00",0,Failed,ach,08/03/2021,06/04/2022,TRUE,4,0
+4311,INV-100666,ACC-9879,Stark Holdings,,APAC,Retail,Tier 2,Monthly,10,EUR,801.90,25,success,wire,2022/09/03,2023-10-23,0,5,0
+4320,INV-100152,ACC-3435,Prestige Co,billing@prestige.com,EMEA,Energy,starter,Monthly,10,USD,$490.00,0,PAID,ACH,2024/09/19,05/21/2025,No,,2
+4424,INV-103521,ACC-5854,Wayne Labs,billing@wayne.com,NA,Education,Starter,Monthly,10,EUR,€529.20,0,paid,invoice,2021/01/14,18-07-2021,N,3,0
+4545,INV-102416,ACC-3608,Oscorp LLC,billing@oscorp.com,APAC,Energy,starter,Monthly,50,GBP,"2,800.35 GBP",10,completed,Credit Card,Dec 26 2022,07/01/2023,No,3,0
+4548,INV-101109,ACC-3742,Acme LLC,billing_at_acme.com,LATAM,Retail,Tier 1,Monthly,250,USD,"12,250.00 USD",0,PENDING,wire,2022-10-26,03/15/2023,No,4,8
+4551,INV-101058,ACC-9641,Tyrell LLC,billing@tyrell.com,NA,Retail,ENT,Monthly,50,USD,14950.00,0,Complete,,2023-03-31,2025-05-15,N,,1
+4555,INV-103159,ACC-2059,Vandelay Ltd,billing@vandelay.com,APAC,Education,Tier 3,annually,10,GBP,30378.40,20,Paid,Wire Transfer,03/12/2021,2023-01-01,N,,0
+4578,INV-100666,ACC-9879,Stark Holdings,,APAC,Retail,Tier 2,Monthly,10,EUR,801.90,25,Complete,wire,2022/09/03,2023-10-23,0,5,0
+4580,INV-103319,ACC-5851,Vandelay Co,billing@vandelay.com,APAC,, Starter ,annual,3,EUR,"€1,349.46",15,Paid,ACH,11/17/2021,04/15/2022,FALSE,4,1
+4658,INV-102658,ACC-6517,Nakatomi LLC,billing@nakatomi.com,NA,Energy,enterprise ,annually,10,USD,29900,0,Paid,Wire Transfer,2024/07/14,2026-11-05,Yes,,0
+4726,INV-102015,ACC-3513,Aperture Group,billing@aperture.com,APAC,Manufacturing,PRO,annual,50,EUR,53460.00,0,paid,,2021/03/12,2022/01/12,N,,2
+4869,INV-104205,ACC-1897,Tyrell Holdings,billing@tyrell.com,NA,Manufacturing,enterprise ,annual,5,EUR,13724.10,15,paid,credit_card,2023-07-09,2025-09-01,false,2,0
+4913,INV-101010,ACC-5014,Acme Industries,billing@acme.com,APAC,Travel,Professional,yearly,1,EUR,1069.20,0,cancelled,ACH,2021/10/10,2023/03/01,Yes,4,1
+4915,INV-103159,ACC-2059,Vandelay Ltd,billing@vandelay.com,APAC,Education,Tier 3,annually,10,GBP,30378.40,20,Complete,Wire Transfer,03/12/2021,2023-01-01,N,,0
+4951,INV-103319,ACC-5851,Vandelay Co,billing@vandelay.com,APAC,, Starter ,annual,3,EUR,"€1,349.46",15,success,ACH,11/17/2021,04/15/2022,FALSE,4,1
+5087,INV-100362,ACC-7484,Gekko Labs,,EMEA,Logistics,STARTER,annually,10,EUR,5292.00,0,Complete,Wire Transfer,2021-01-09,19-07-2023,0,1,8
+5103,INV-101678,ACC-6753,Oscorp Industries,billing@oscorp.com,NA,Education,Pro,monthly,5,USD,$495.00,0,error,Wire Transfer,2021-11-01,May 2 2024,0,3,0
+5106,INV-102708,ACC-3765,Prestige Inc,billing@prestige.com,APAC,,enterprise,Annual,10,USD,-29900.00,0,success,Credit Card,2024-05-08,25-07-2025,N,5,0
