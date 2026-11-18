@@ -1,28 +1,61 @@
-# CloudNova: local invoice questions
+# CloudNova invoice questions
 
-A focused Track B prototype cleans the supplied invoice ledger into SQLite and answers six bounded stakeholder questions with inspectable SQL and bound parameters. It needs Python 3.9+ and SQLite with window-function support; no packages, credentials or network are needed.
+CloudNova is a fictional subscription business with a messy invoice export. This local tool cleans that export and answers six questions about revenue, customers, and unpaid invoices. Each answer includes the SQL query and its parameters, so you can see how it was calculated.
 
-Run all six questions from a clean checkout:
+The tool uses Python and an in-memory SQLite database. It needs Python 3.9 or newer and SQLite with window-function support. Running the demo requires no third-party packages, credentials, or network connection.
+
+## Try it
+
+From the repository root, run all six questions:
 
 ```sh
 python3 -m app
 ```
 
-Ask one supported question with `python3 -m app --question 'Which region has the highest average MRR per account?'`; use `--csv path` for a compatible file. Answers and quality information are JSON-like text. Money and MRR values are **USD cents**; divide by 100. `python3 -m unittest discover -s evals -v` runs fixture checks and one explicitly expected failure. An unexpected success of that expected-failure test causes a nonzero exit.
+To ask one supported question, use:
 
-The deterministic router accepts the six questions printed by the demo and a few explicitly listed wording variants. It is not a general natural-language model. Unsupported questions, including historical churn and arbitrary SQL, are rejected. The query text and parameters are displayed; SQL templates alone execute and SQLite is read-only after loading. The CSV is never sent anywhere by the program.
+```sh
+python3 -m app --question 'Which region has the highest average MRR per account?'
+```
 
-## Interpretation and limitations
+Use `--csv path/to/invoices.csv` to supply another file with the required columns. The output starts with data-quality counts and assumptions, followed by the question, SQL, parameters, column names, and results. Money and monthly recurring revenue (MRR) are reported in **US cents**; divide by 100 to get dollars. An average may contain a fraction of a cent.
 
-The [pre-build spec](specs/track-b-spec.md) records detailed rules; [changes and gaps](specs/implementation-notes.md) identify departures. Revenue is paid plus negative refunds; the 2024 query shows paid, refunds, and net separately. FX rates are fixed at 1.08 EUR and 1.27 GBP. Account MRR uses USD list price × seats × discount, once per latest dated account snapshot; annual billing does not change MRR. Churn is a **current snapshot fraction**, not churn in a period, because no churn dates are available. The first row wins conflicting invoice IDs without an authoritative update timestamp, so all totals are provisional. Slash dates use month/day, hyphens day-month; ambiguity counts are surfaced. Top accounts use net recognized revenue and snapshot CSAT; missing CSAT is unknown. Pending/failed counts include all such invoices, while exposure sums only valid positive amounts.
+The question interface matches a small, fixed set of wordings. It is not a general-purpose language model: questions outside that set are rejected. It runs fixed SQL templates with bound parameters against a database set to query-only after loading; it does not execute SQL supplied by the user.
 
-The quality output reports data exclusions and conflicting invoice IDs; [competing source rows](docs/conflicting-invoices.csv) are provided for the bundled CSV, with original source row numbers. Amounts with unrecognized currency or conflicting currency marker, invalid invoice dates in date-filtered queries, unknown categories in dependent metrics, invalid MRR inputs and nonnegative refunds are excluded from relevant calculations. The ledger can contain inconsistent snapshots; a latest invoice is not proof of a currently active subscription. Counters and results are not a reconciliation with a source system. A missing account/date cannot form a snapshot. The fixture assertions are independent arithmetic; full-data results are computed outputs, not independently audited financial statements.
+## Questions it answers
 
-With another day: obtain finance decisions on conflicting records and ambiguous dates, reconcile against billing totals, add historical subscription/churn events, evaluate broader language paraphrases, and add stronger per-metric exclusion and lineage reports. See [architecture](docs/architecture.md), [AI direction](AGENTS.md), [prompt log](docs/prompt-log.md), and [QA record](docs/qa.md).
+The default demo asks these questions:
 
-## Developer checks
+1. What was our total recognized revenue in USD for paid invoices in 2024?
+2. Which region has the highest average MRR per account?
+3. How much have we given back in refunds?
+4. What's the churn rate among Enterprise accounts vs Starter?
+5. List the top 5 accounts by revenue, and flag any with CSAT ≤ 2.
+6. How many invoices are stuck in pending/failed and what's the exposed $?
 
-The application itself still has no third-party runtime dependencies. With GNU Make and Python 3.12 recommended for development tools, set up a virtual environment and run all checks:
+The first question returns three figures: paid revenue, the signed refund adjustment, and their net total. That question also accepts another year from 1900 through 2099. The other questions use all available invoice dates or the latest account snapshot, as described below.
+
+## How the numbers are calculated
+
+- **Revenue:** Paid invoices count as revenue; negative refunds reduce it. Pending, failed, and void invoices do not count. The 2024 answer filters by invoice date.
+- **Currency:** Invoice amounts are converted to US dollars using fixed rates of 1 EUR = 1.08 USD and 1 GBP = 1.27 USD. Each converted invoice is rounded to the nearest cent.
+- **MRR:** For each active account, monthly list price per seat is multiplied by seats and the remaining share after discount. List prices are $49 for Starter, $99 for Pro, and $299 for Enterprise. Annual invoices bill for 10 months, but an annual subscription's MRR is still its monthly price; the annual invoice amount is not divided into MRR.
+- **Accounts and churn:** For account-level questions, the latest invoice with a valid date supplies one snapshot per account. MRR averages include snapshots marked as not churned. The churn comparison divides churned accounts by accounts with a known churn status in each plan. This is a snapshot, not a churn rate for a specific period: the data has no churn dates.
+- **Top accounts and exposure:** Accounts are ranked by paid revenue plus negative refunds, and the latest snapshot supplies customer satisfaction (CSAT). A missing score is unknown. Pending/failed exposure sums valid positive invoice amounts; its invoice count includes pending and failed records even when an amount cannot be summed.
+
+## Data quality and limits
+
+The export contains duplicate invoice IDs without a reliable update timestamp. The first record in the source file wins; it is not necessarily the correct one. The bundled data has 82 exact duplicate rows and 43 IDs with conflicting records. The [conflict report](docs/conflicting-invoices.csv) shows all source records for those IDs; it is a static report for the bundled file, not a report generated for replacement files.
+
+Dates with slashes are read as month/day/year; day-month-year dates with hyphens are read as day/month/year. Some dates could mean either order. The bundled data has 612 such ambiguous invoice dates, and the choice can affect account snapshots and date-based results. Confirm the intended formats with finance before relying on the numbers.
+
+The tool counts data-quality issues and leaves invalid values out of calculations that depend on them. For example, it excludes an amount if its currency is unknown or conflicts with a currency marker, and excludes nonnegative refund amounts from refund totals. The counts are aggregate, not a complete explanation of exclusions for each answer. Invalid dates cannot be used in date-filtered results or account snapshots. Unknown plan, status, churn, or pricing values can exclude records from the relevant metrics.
+
+The latest invoice is only a proxy for an account's current subscription. The ledger does not establish a cancellation date or guarantee that a snapshot is current. Results depend on the duplicate and date choices and have not been reconciled with a billing system. For another day's work, confirm those choices with finance, reconcile totals, add dated subscription events, and report exclusions and source records for each answer.
+
+## Tests and developer checks
+
+The app itself has no third-party runtime dependencies. For development, create a virtual environment using Python 3.12 and install the pinned tools; GNU Make provides shortcuts:
 
 ```sh
 python3 -m venv .venv
@@ -31,7 +64,7 @@ make setup
 make all
 ```
 
-`make all` runs both test suites, Ruff and Pylint, the Ruff format check, Pyright, and a quiet demo run; it does not reformat files. Other useful targets are:
+`make all` runs both test suites, Ruff, Pylint, a formatting check, Pyright, and the demo without changing files. The evaluation suite includes an **expected failure** for historical churn because the data does not contain churn dates. An unexpected success of that case makes the test command fail so the limitation must be reviewed.
 
 ```sh
 make test          # Run evaluations and unit tests
@@ -43,6 +76,6 @@ make demo          # Print all six demo answers
 make help          # List targets
 ```
 
-The targets use `python3` from your active environment by default; override it with, for example, `make PYTHON=/path/to/python all`. `make setup` installs the pinned tools into that Python environment.
+Make uses `python3` from the active environment; override it with `make PYTHON=/path/to/python all`. The demo can also be run without Make using `python3 -m app`.
 
-The original evaluation suite retains its one expected historical-churn failure. The separate unit tests exercise cleaning, duplicates, account snapshots, query-only access, and malformed input. Ruff, Pylint and Pyright use the repository configuration in `pyproject.toml`; GitHub Actions runs tests and the demo on Python 3.9 and 3.12, plus quality checks on 3.12. These checks and the input-validation fix were added after the original assessment and independent review.
+For implementation details and the evidence behind the work, see the [business briefing](source/business-context.md), [pre-build specification](specs/track-b-spec.md), [implementation notes](specs/implementation-notes.md), [architecture](docs/architecture.md), [AI instructions](AGENTS.md), [prompt log](docs/prompt-log.md), and [QA record](docs/qa.md).
