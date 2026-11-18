@@ -5,3 +5,4 @@
 - The actual independent-review request and outcome are recorded separately in `docs/qa.md`.
 
 - After the original assessment review, the user requested unit tests, Ruff, typing and similar quality checks inspired by `DGR-AI-Labs/dgr-hermes`. Codex inspected that repository’s CI and pinned tooling, added focused tests and a malformed-CSV error fix, and configured local and CI checks.
+- The user requested additional QA through Claude Code after the README rewrite. The scoped prompt asked for an independent review of the current business logic, code, tests, CI, and documentation; the [QA record](qa.md) describes the packet, findings, and author verification.
