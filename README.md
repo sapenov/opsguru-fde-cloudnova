@@ -10,7 +10,7 @@ python3 -m app
 
 Ask one supported question with `python3 -m app --question 'Which region has the highest average MRR per account?'`; use `--csv path` for a compatible file. Answers and quality information are JSON-like text. Money and MRR values are **USD cents**; divide by 100. `python3 -m unittest discover -s evals -v` runs fixture checks and one explicitly expected failure. An unexpected success of that expected-failure test causes a nonzero exit.
 
-The deterministic router accepts the six questions printed by the demo and limited keyword variants. It is not a general natural-language model. Unsupported questions, including historical churn and arbitrary SQL, are rejected. The query text and parameters are displayed; SQL templates alone execute and SQLite is read-only after loading. The CSV is never sent anywhere by the program.
+The deterministic router accepts the six questions printed by the demo and a few explicitly listed wording variants. It is not a general natural-language model. Unsupported questions, including historical churn and arbitrary SQL, are rejected. The query text and parameters are displayed; SQL templates alone execute and SQLite is read-only after loading. The CSV is never sent anywhere by the program.
 
 ## Interpretation and limitations
 

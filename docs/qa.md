@@ -14,3 +14,9 @@ For Claude Chat, supply the separately prepared local review bundle and [review 
 - Router now accepts only listed question forms, rejecting extra filters rather than silently ignoring them. For a revenue account lacking any valid dated snapshot, the top-account query retains the revenue-side account ID and leaves snapshot fields null.
 
 Open: no independent Claude review; no complete independent reconciliation of all full-data outputs; aggregate rather than per-metric exclusion reporting; fixture coverage does not prove every dirty-data case. See implementation notes for other departures from the pre-build spec.
+
+## Clean-checkout verification and time
+
+`git clone --quiet --no-local . /tmp/opsguru-clean-checkout`, followed there by `python3 -m unittest discover -s evals -v` and `python3 -m app`, completed successfully: 10 checks passed and one was an expected failure. The clean-checkout demo matched the recorded demo byte-for-byte, the CSV hash matched the handoff, and `git status --short` was empty. This verification was performed at commit `5a4cec6`; subsequent changes are documentation and packaging only.
+
+The first recorded shell timestamp was 11:52:10 ET and the clean-checkout verification completed by 11:57:42 ET on November 18, 2026: approximately 5 minutes 32 seconds elapsed for this session's observed work. Active time was not separately instrumented and cannot be stated precisely. The handoff/specification work happened earlier and is not included in this session's elapsed time.
