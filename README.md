@@ -22,18 +22,27 @@ With another day: obtain finance decisions on conflicting records and ambiguous 
 
 ## Developer checks
 
-The application itself still has no third-party runtime dependencies. To install the pinned development tools (Python 3.12 recommended for tooling) and run the same local checks used by CI:
+The application itself still has no third-party runtime dependencies. With GNU Make and Python 3.12 recommended for development tools, set up a virtual environment and run all checks:
 
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
-python -m pip install -r requirements-dev.txt
-python -m unittest discover -s evals -v
-python -m unittest discover -s tests -v
-python -m ruff check .
-python -m ruff format --check .
-python -m pylint --persistent=no --fail-under=8.0 --fail-on=E,F app evals tests
-python -m pyright --warnings
+make setup
+make all
 ```
+
+`make all` runs both test suites, Ruff and Pylint, the Ruff format check, Pyright, and a quiet demo run; it does not reformat files. Other useful targets are:
+
+```sh
+make test          # Run evaluations and unit tests
+make format        # Apply safe Ruff fixes and formatting
+make format-check  # Check formatting without changing files
+make lint          # Run Ruff and Pylint
+make typecheck     # Run Pyright
+make demo          # Print all six demo answers
+make help          # List targets
+```
+
+The targets use `python3` from your active environment by default; override it with, for example, `make PYTHON=/path/to/python all`. `make setup` installs the pinned tools into that Python environment.
 
 The original evaluation suite retains its one expected historical-churn failure. The separate unit tests exercise cleaning, duplicates, account snapshots, query-only access, and malformed input. Ruff, Pylint and Pyright use the repository configuration in `pyproject.toml`; GitHub Actions runs tests and the demo on Python 3.9 and 3.12, plus quality checks on 3.12. These checks and the input-validation fix were added after the original assessment and independent review.
