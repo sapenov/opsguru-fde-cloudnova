@@ -19,3 +19,21 @@ The [pre-build spec](specs/track-b-spec.md) records detailed rules; [changes and
 The quality output reports data exclusions and conflicting invoice IDs; [competing source rows](docs/conflicting-invoices.csv) are provided for the bundled CSV, with original source row numbers. Amounts with unrecognized currency or conflicting currency marker, invalid invoice dates in date-filtered queries, unknown categories in dependent metrics, invalid MRR inputs and nonnegative refunds are excluded from relevant calculations. The ledger can contain inconsistent snapshots; a latest invoice is not proof of a currently active subscription. Counters and results are not a reconciliation with a source system. A missing account/date cannot form a snapshot. The fixture assertions are independent arithmetic; full-data results are computed outputs, not independently audited financial statements.
 
 With another day: obtain finance decisions on conflicting records and ambiguous dates, reconcile against billing totals, add historical subscription/churn events, evaluate broader language paraphrases, and add stronger per-metric exclusion and lineage reports. See [architecture](docs/architecture.md), [AI direction](AGENTS.md), [prompt log](docs/prompt-log.md), and [QA record](docs/qa.md).
+
+## Developer checks
+
+The application itself still has no third-party runtime dependencies. To install the pinned development tools (Python 3.12 recommended for tooling) and run the same local checks used by CI:
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s evals -v
+python -m unittest discover -s tests -v
+python -m ruff check .
+python -m ruff format --check .
+python -m pylint --persistent=no --fail-under=8.0 --fail-on=E,F app evals tests
+python -m pyright --warnings
+```
+
+The original evaluation suite retains its one expected historical-churn failure. The separate unit tests exercise cleaning, duplicates, account snapshots, query-only access, and malformed input. Ruff, Pylint and Pyright use the repository configuration in `pyproject.toml`; GitHub Actions runs tests and the demo on Python 3.9 and 3.12, plus quality checks on 3.12. These checks and the input-validation fix were added after the original assessment and independent review.
