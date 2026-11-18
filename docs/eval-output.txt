@@ -1,0 +1,16 @@
+test_account_without_valid_snapshot_keeps_id (test_app.Evaluation.test_account_without_valid_snapshot_keeps_id) ... ok
+test_churn_snapshot (test_app.Evaluation.test_churn_snapshot) ... ok
+test_conflict_and_ambiguous_date (test_app.Evaluation.test_conflict_and_ambiguous_date) ... ok
+test_exposure (test_app.Evaluation.test_exposure) ... ok
+test_historical_churn_date_unavailable (test_app.Evaluation.test_historical_churn_date_unavailable) ... expected failure
+test_paid_and_refund (test_app.Evaluation.test_paid_and_refund) ... ok
+test_refunds (test_app.Evaluation.test_refunds) ... ok
+test_region_average_distinct_active_accounts (test_app.Evaluation.test_region_average_distinct_active_accounts) ... ok
+test_top_accounts_csat (test_app.Evaluation.test_top_accounts_csat) ... ok
+test_unrequested_filter_is_rejected (test_app.Evaluation.test_unrequested_filter_is_rejected) ... ok
+test_unsupported_is_rejected (test_app.Evaluation.test_unsupported_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.051s
+
+OK (expected failures=1)

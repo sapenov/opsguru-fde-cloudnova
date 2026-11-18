@@ -1,0 +1,146 @@
+Quality and exclusions: {"accounts_without_valid_date": 0, "ambiguous_invoice_dates": 612, "canonical_invoices": 5000, "conflicting_ids": 43, "conflicting_invoice_ids": ["INV-100071", "INV-100152", "INV-100362", "INV-100630", "INV-100666", "INV-100829", "INV-100838", "INV-101010", "INV-101058", "INV-101109", "INV-101434", "INV-101448", "INV-101631", "INV-101678", "INV-101946", "INV-102011", "INV-102015", "INV-102032", "INV-102076", "INV-102104", "INV-102416", "INV-102462", "INV-102470", "INV-102561", "INV-102658", "INV-102708", "INV-103159", "INV-103319", "INV-103320", "INV-103377", "INV-103437", "INV-103521", "INV-103598", "INV-103655", "INV-103694", "INV-103831", "INV-104009", "INV-104040", "INV-104133", "INV-104205", "INV-104439", "INV-104646", "INV-104647"], "exact_duplicate_rows": 82, "input_rows": 5125, "invalid_churn": 0, "invalid_csat": 0, "invalid_invoice_dates": 0, "invalid_mrr": 0, "invalid_usd_amount": 0, "malformed_email": 139, "missing_invoice_id": 0, "positive_refunds": 0}
+Amounts and MRR are USD cents; dates use documented conventions. Account metrics use latest dated snapshot; churn is not dated. Refunds are signed. Missing/invalid values are excluded from dependent sums.
+{
+  "question": "What was our total recognized revenue in USD for paid invoices in 2024?",
+  "sql": "SELECT ? AS year, COALESCE(SUM(CASE WHEN status='paid' THEN usd_cents END),0) AS paid_cents, COALESCE(SUM(CASE WHEN status='refunded' THEN usd_cents END),0) AS refund_cents, COALESCE(SUM(usd_cents),0) AS net_cents FROM invoices WHERE status IN ('paid','refunded') AND invoice_date >= ? AND invoice_date < ?",
+  "parameters": [
+    2024,
+    "2024-01-01",
+    "2025-01-01"
+  ],
+  "columns": [
+    "year",
+    "paid_cents",
+    "refund_cents",
+    "net_cents"
+  ],
+  "rows": [
+    [
+      2024,
+      3268637120,
+      -193128282,
+      3075508838
+    ]
+  ]
+}
+{
+  "question": "Which region has the highest average MRR per account?",
+  "sql": "SELECT region, ROUND(AVG(mrr_cents),2) AS average_mrr_cents, COUNT(*) AS active_accounts FROM accounts WHERE churned=0 AND mrr_cents IS NOT NULL AND region IS NOT NULL GROUP BY region ORDER BY average_mrr_cents DESC, region LIMIT 1",
+  "parameters": [],
+  "columns": [
+    "region",
+    "average_mrr_cents",
+    "active_accounts"
+  ],
+  "rows": [
+    [
+      "APAC",
+      614729.7,
+      753
+    ]
+  ]
+}
+{
+  "question": "How much have we given back in refunds?",
+  "sql": "SELECT COALESCE(SUM(usd_cents),0) AS refund_cents, COUNT(usd_cents) AS refund_invoices FROM invoices WHERE status='refunded' ",
+  "parameters": [],
+  "columns": [
+    "refund_cents",
+    "refund_invoices"
+  ],
+  "rows": [
+    [
+      -892320384,
+      291
+    ]
+  ]
+}
+{
+  "question": "What's the churn rate among Enterprise accounts vs Starter?",
+  "sql": "SELECT plan, SUM(churned) AS churned_accounts, COUNT(*) AS known_accounts, ROUND(100.0*SUM(churned)/COUNT(*),2) AS churn_pct FROM accounts WHERE plan IN ('Enterprise','Starter') AND churned IS NOT NULL GROUP BY plan ORDER BY plan",
+  "parameters": [],
+  "columns": [
+    "plan",
+    "churned_accounts",
+    "known_accounts",
+    "churn_pct"
+  ],
+  "rows": [
+    [
+      "Enterprise",
+      171,
+      780,
+      21.92
+    ],
+    [
+      "Starter",
+      354,
+      1882,
+      18.81
+    ]
+  ]
+}
+{
+  "question": "List the top 5 accounts by revenue, and flag any with CSAT ≤ 2.",
+  "sql": "SELECT r.account_id, a.account_name, r.revenue_cents, a.csat, CASE WHEN a.csat IS NULL THEN NULL WHEN a.csat<=2 THEN 1 ELSE 0 END AS low_csat FROM (SELECT account_id, SUM(usd_cents) AS revenue_cents FROM invoices WHERE status IN ('paid','refunded') AND usd_cents IS NOT NULL AND account_id IS NOT NULL GROUP BY account_id) r LEFT JOIN accounts a ON a.account_id=r.account_id ORDER BY r.revenue_cents DESC, r.account_id LIMIT 5",
+  "parameters": [],
+  "columns": [
+    "account_id",
+    "account_name",
+    "revenue_cents",
+    "csat",
+    "low_csat"
+  ],
+  "rows": [
+    [
+      "ACC-7509",
+      "Stark Inc",
+      121059275,
+      4,
+      0
+    ],
+    [
+      "ACC-1420",
+      "Tyrell Industries",
+      120809275,
+      null,
+      null
+    ],
+    [
+      "ACC-9946",
+      "Initech LLC",
+      120564275,
+      4,
+      0
+    ],
+    [
+      "ACC-1196",
+      "Pied Piper Partners",
+      110735284,
+      3,
+      0
+    ],
+    [
+      "ACC-5211",
+      "Oscorp Industries",
+      108507848,
+      5,
+      0
+    ]
+  ]
+}
+{
+  "question": "How many invoices are stuck in pending/failed and what's the exposed $?",
+  "sql": "SELECT COUNT(*) AS invoice_count, COALESCE(SUM(CASE WHEN usd_cents > 0 THEN usd_cents END),0) AS exposure_cents FROM invoices WHERE status IN ('pending','failed')",
+  "parameters": [],
+  "columns": [
+    "invoice_count",
+    "exposure_cents"
+  ],
+  "rows": [
+    [
+      896,
+      2904202437
+    ]
+  ]
+}

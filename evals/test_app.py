@@ -38,6 +38,11 @@ class Evaluation(unittest.TestCase):
         self.assertEqual(self.quality['ambiguous_invoice_dates'],1)
     def test_unsupported_is_rejected(self):
         with self.assertRaises(ValueError): ask(self.db,'DROP TABLE invoices')
+    def test_unrequested_filter_is_rejected(self):
+        with self.assertRaises(ValueError): ask(self.db, 'How many pending failed invoices in EMEA?')
+    def test_account_without_valid_snapshot_keeps_id(self):
+        db, _ = build([row('9', 'Z', invoice_date='invalid')])
+        self.assertEqual(ask(db, 'List top 5 accounts by revenue and flag CSAT ≤ 2.')['rows'][0][0], 'Z')
     @unittest.expectedFailure
     def test_historical_churn_date_unavailable(self):
         self.assertIsNotNone(ask(self.db,'What was churn rate in 2024?'))
