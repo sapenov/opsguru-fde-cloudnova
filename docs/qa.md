@@ -2,7 +2,7 @@
 
 **Current status:** Independent Claude review completed; see the final section. Earlier attempts below are retained as a chronological record.
 
-## Independent Claude review: attempted, not completed
+## Initial independent Claude review attempt (historical)
 
 On 2026-11-18, Claude Code `2.1.325` was installed and `claude auth status` reported a Bedrock configuration. A scoped review was attempted with `claude -p --bare --tools '' --disable-slash-commands < /tmp/opsguru-claude-review-packet.txt > /tmp/opsguru-claude-review-output.txt 2> /tmp/opsguru-claude-review-error.txt`. The packet contained the review brief, employer briefs, specs, source code, fixture tests, documentation, author-generated demo and test output, Git history, and only the CSV header and first two rows. No tools were exposed to the reviewer, and no keys, correspondence, or unrelated files were included. The process exited 1 with: `API Error: Could not load AWS credentials · Token is expired.` There was no Claude verdict; it is not an independent review. The packet was prepared before the local fixes below, so use the final review bundle instead of that packet for a future review.
 
@@ -15,7 +15,7 @@ For Claude Chat, supply the separately prepared local review bundle and [review 
 - A separate raw-CSV Python calculation, without importing application code, independently reproduced 2024 paid cents `3268637120`, refund cents `-193128282` and net cents `3075508838` with the same first-row/date/FX assumptions. This does not independently validate those assumptions or all other full-data metrics.
 - Router now accepts only listed question forms, rejecting extra filters rather than silently ignoring them. For a revenue account lacking any valid dated snapshot, the top-account query retains the revenue-side account ID and leaves snapshot fields null.
 
-Open: no independent Claude review; no complete independent reconciliation of all full-data outputs; aggregate rather than per-metric exclusion reporting; fixture coverage does not prove every dirty-data case. See implementation notes for other departures from the pre-build spec.
+At that point, the independent Claude review remained outstanding. Remaining limitations include no complete independent reconciliation of all full-data outputs; aggregate rather than per-metric exclusion reporting; fixture coverage does not prove every dirty-data case. See implementation notes for other departures from the pre-build spec.
 
 ## Clean-checkout verification and time
 
@@ -27,7 +27,7 @@ The first recorded shell timestamp was 11:52:10 ET and the clean-checkout verifi
 
 On November 18, the user reported that Claude SSO had been refreshed. A new review was prepared from a scoped copy of this repository with Claude Code's restricted mode, only `Read`, `Glob`, and `Grep` tools, no command execution, and an instruction to avoid sending the full CSV unnecessarily. The first `--bare` attempt did not load the local Bedrock settings and failed with an expired OAuth session. A second attempt loaded only the provider/profile/region settings, but the sandbox could not resolve the AWS SSO hostname (`EAI_AGAIN`). No review output or verdict was produced.
 
-An escalated retry to access AWS SSO and Bedrock was rejected by automatic approval review: the reviewer identified the risk of sending private assessment materials to an externally hosted AWS service and said explicit authorization for that destination was required. It was not retried through another route. The independent review remains outstanding.
+An escalated retry to access AWS SSO and Bedrock was rejected by automatic approval review: the reviewer identified the risk of sending private assessment materials to an externally hosted AWS service and said explicit authorization for that destination was required. It was not retried through another route at that point. The subsequently authorized review is recorded below.
 
 ## Completed independent Claude review
 
